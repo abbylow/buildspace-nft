@@ -15,7 +15,7 @@ contract MyEpicNFT is ERC721URIStorage {
   // Magic given to us by OpenZeppelin to help us keep track of tokenIds.
   using Counters for Counters.Counter;
   Counters.Counter private _tokenIds;
-  uint constant MAX_NUMBER = 50;
+  uint256 constant MAX_NUMBER = 50;
 
   // We split the SVG at the part where it asks for the background color.
   string svgPartOne = "<svg xmlns='http://www.w3.org/2000/svg' preserveAspectRatio='xMinYMin meet' viewBox='0 0 350 350'><style>.base { fill: white; font-family: serif; font-size: 24px; }</style><rect width='100%' height='100%' fill='";
@@ -125,5 +125,9 @@ contract MyEpicNFT is ERC721URIStorage {
 
   function getTotalNFTsMintedSoFar() public view returns (uint256) {
     return _tokenIds.current(); // the counter starts from zero, so current is the exact number that already minted
+  }
+
+  function getMaxLimit() public view returns (uint256) {
+    return MAX_NUMBER;
   }
 }
