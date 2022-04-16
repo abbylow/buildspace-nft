@@ -116,6 +116,8 @@ contract MyEpicNFT is ERC721URIStorage {
     _safeMint(msg.sender, newItemId);
   
     _setTokenURI(newItemId, finalTokenUri);
+    // Can also upload the NFT data to IPFS
+    // _setTokenURI(newItemId, "ipfs://INSERT_YOUR_CID_HERE")
   
     _tokenIds.increment();
     console.log("An NFT w/ ID %s has been minted to %s", newItemId, msg.sender);
