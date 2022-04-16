@@ -15,3 +15,5 @@ npx hardhat help
 npx hardhat run scripts/run.js
 npx hardhat run scripts/deploy.js --network rinkeby
 ```
+
+Frontend Project: https://github.com/abbylow/buildspace-nft-frontend
