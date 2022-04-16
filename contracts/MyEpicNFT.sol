@@ -15,6 +15,7 @@ contract MyEpicNFT is ERC721URIStorage {
   // Magic given to us by OpenZeppelin to help us keep track of tokenIds.
   using Counters for Counters.Counter;
   Counters.Counter private _tokenIds;
+  uint constant MAX_NUMBER = 50;
 
   // We split the SVG at the part where it asks for the background color.
   string svgPartOne = "<svg xmlns='http://www.w3.org/2000/svg' preserveAspectRatio='xMinYMin meet' viewBox='0 0 350 350'><style>.base { fill: white; font-family: serif; font-size: 24px; }</style><rect width='100%' height='100%' fill='";
@@ -55,7 +56,6 @@ contract MyEpicNFT is ERC721URIStorage {
     return thirdWords[rand];
   }
 
-    // Same old stuff, pick a random color.
   function pickRandomColor(uint256 tokenId) public view returns (string memory) {
     uint256 rand = random(string(abi.encodePacked("COLOR", Strings.toString(tokenId))));
     rand = rand % colors.length;
@@ -68,6 +68,7 @@ contract MyEpicNFT is ERC721URIStorage {
 
   function makeAnEpicNFT() public {
     uint256 newItemId = _tokenIds.current();
+    require(newItemId < MAX_NUMBER, "Cannot be minted because it reached MAX number of NFT.");
 
     // We go and randomly grab one word from each of the three arrays.
     string memory first = pickRandomFirstWord(newItemId);
@@ -120,5 +121,9 @@ contract MyEpicNFT is ERC721URIStorage {
     console.log("An NFT w/ ID %s has been minted to %s", newItemId, msg.sender);
 
     emit NewEpicNFTMinted(msg.sender, newItemId);
+  }
+
+  function getTotalNFTsMintedSoFar() public view returns (uint256) {
+    return _tokenIds.current(); // the counter starts from zero, so current is the exact number that already minted
   }
 }
