@@ -16,3 +16,5 @@ npx hardhat run scripts/run.js
 npx hardhat run scripts/deploy.js --network rinkeby
 npx hardhat verify YOUR_CONTRACT_ADDRESS --network rinkeby 
 ```
+
+Frontend Project: https://github.com/abbylow/buildspace-nft-frontend
